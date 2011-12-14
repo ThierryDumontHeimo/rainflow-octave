@@ -1,5 +1,9 @@
 /*  RAINFLOW $ Revision: 1.0 $ */
 /*  by Adam Nieslony           */
+/*  Version 1.1 Torfinn Ottesen, 2011-12-14, 
+    - Array size increase, a[512], t[512]-> a[16384], t[16384]  
+*/
+
 
 #include <math.h>
 #include "mex.h"
@@ -8,7 +12,7 @@
 /* ++++++++++ Rain flow without time analysis */
 void
 rf3(mxArray *array_ext, mxArray *hs[]) {
-  double *pr, *po, a[512], ampl, mean;
+  double *pr, *po, a[16384], ampl, mean;
   int tot_num, index, j, cNr;
   mxArray *array_out;
 
@@ -75,7 +79,7 @@ rf3(mxArray *array_ext, mxArray *hs[]) {
 /* ++++++++++ Rain flow with time analysis */
 void
 rf5(mxArray *array_ext, mxArray *array_t, mxArray *hs[]) {
-  double *pr, *pt, *po, a[512], t[512], ampl, mean, period, atime;
+  double *pr, *pt, *po, a[16384], t[16384], ampl, mean, period, atime;
   int tot_num, index, j, cNr;
   mxArray *array_out;
 
