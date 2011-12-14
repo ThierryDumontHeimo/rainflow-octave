@@ -1,0 +1,17 @@
+Name: rainflow
+Version: 1.0.0
+Date: 2009-01-02
+Author: Adam Nieslony (code), Torfinn Ottesen (GNU Octave package)
+Maintainer: Torfinn Ottesen (at) gmail (dot) com
+Title: Rainflow count of stress cycles for fatigue analysis 
+Description: This function identifies the stress cycles in an irregular 
+ time series of stress. The rain flow algorithm code has been prepared 
+ according to the ASTM standard "Standard practices for cycle counting 
+ in fatigue analysis" and optimized considering the calculation time.
+ This is the same algorithm as that described by de Jonge, J.B.(1982): 
+ "The analysis of load-time histories by means of counting methods". 
+ The results are exactly equal to those obtained by the algorithm described
+ by Matsuiski, M. and Endo, T. (1969): "Fatigue of metals subjected to 
+ varying stress".
+Depends:
+License: GPL version 3

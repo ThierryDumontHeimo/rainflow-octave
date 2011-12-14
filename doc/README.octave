@@ -1,0 +1,95 @@
+
+Reference for the future oct-builder: 
+    http://octave.sourceforge.net/coda/c58.html
+
+
+RAINFLOW COUNT FOR OCTAVE (rainflow.c)
+--------------------------------------
+
+This utility function provide the rainflow count algorithm that is
+typically used in fatigue analysis. It is typically used to extract
+stress-cycles that causes material fatigue.
+
+
+AN ALERT FOR THE ENGINEER CALCULATING FAIIGUE DAMAGE
+----------------------------------------------------
+These routines provide for each stress cycle, the following
+minimum information:
+a) the stress variation, the amplitude
+b) the average stress value for the cycle
+c) the number of cycles (0.5 or 1)
+
+Observe that the stress range, the double amplitude, is usually 
+applied in SN-curves when calculating the fatigue damage by the
+Miner-Palmgren method. You should normally do:  
+
+            range = 2*amplitude
+
+
+RAINFLOW ALGORITHM:
+-------------------
+The algorithm used is the "range pair-range" algorithm as described
+in ASTM E 1049-85 and by de Jonge (1982). The result from the "range
+pair-range" algorithm is exactly similar to that of the pagoda-roof 
+"rainflow" algorithm as described by Matsuiski, M. and  Endo, T. 
+(1969). 
+
+However, their descriptions are very different and the "range 
+pair-range" algorithm is very much simpler to program. 
+
+
+REFERENCES:
+-----------
+1) Matsuiski, M. and Endo, T. (1969): 
+   "Fatigue of metals subjected to varying stress"
+2) de Jonge, J.B. (1982): 
+   "The analysis of load-time histories by means of counting methods"
+3) ASTM E 1049-85 (Reapproved 1997), 
+   Standard practices for cycle counting in fatigue analysis, 
+   in: Annual Book of ASTM Standards, Vol. 03.01, 
+   Philadelphia 1999, pp. 710-718
+
+
+AUTHOR:
+---------------
+The code was developed for Matlab by Dr. Adam Nieslonya. It
+was originally released for Matlab. 
+
+
+PACKAGE FOR GNU OCTAVE
+----------------------
+Torfinn Ottesen
+
+
+OCTAVE SPECIFIC INSTALLATION
+------------------------------
+
+THe Makefiles(s) are expected to handle the following steps:
+
+1. Create a mex-file from: rainflow.c
+
+   $ cd ./rainflow
+   $ mkoctfile --mex --strip rainflow.c
+   $ ls rainflow.*
+   $ ls rainflow.mex
+   rainflow.mex
+
+2. Move the rainflow.mex file to place where GNU
+   Octave can find it.
+   
+   Check the search path of Octave. Octave will locate
+   oct- or mex- files automatically if they are in a
+   directory listed in the search path. To figure out 
+   the search path:
+   
+   $ octave
+   octave>  path
+Octave's search path contains the following directories:
+
+.
+/usr/local/share/octave/site-m
+
+   To install, see pkg of GNU Octave (todo):
+
+
+

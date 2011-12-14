@@ -1,0 +1,197 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 FINAL//EN">
+<html>
+<head>
+<meta name="KeyWords" content="rain flow, MATLAB, GNU OCTAVE, MEX, cycle counting">
+<meta name="Language" content="EN">
+<meta http-equiv="Content-Type" content="text/html; CHARSET=ISO-8859-2">
+<title>Rainflow counting method for GNU Octave</TITLE>
+
+<style type="text/css">
+.blue {color:#000080; font-weight:bold}
+</style>
+</HEAD>
+<BODY>
+
+<H1>RAINFLOW COUNTING METHOD FOR GNU OCTAVE</H1>
+
+<h2>Introduction</h2>
+Adam Niesłony prepared <a href="http://www.mathworks.com/matlabcentral/fileexchange/3026">a public rain flow count algorithm </a>
+for the Matlab language back in 2005. This GNU Octave package has been prepared based on this work. 
+Adam Niesłony has specified the GNU GPLv3 license for the purpose of this GNU Octave package.
+
+<h2>Description</h2>
+This utility function provide the rainflow count algorithm that is typically used in fatigue analysis. It is typically used 
+to extract stress-cycles that causes material fatigue.
+
+<h2>An alert for the engineer calculating fatigue damage</h2>
+The routines provide for each stress cycle, the following minimum information:
+<ul>
+  <li>the stress variation, the <u>amplitude</u></li>
+  <li>the average stress value for the cycle</li>
+  <li>the number of cycles (0.5 or 1)</li>
+</ul>
+
+<p>Observe that the stress range, the double amplitude, is usually 
+applied in SN-curves when calculating the fatigue damage by the
+<a href="http://en.wikipedia.org/wiki/Fatigue_(material)#Miner.27s_rule">
+Miner-Palmgren</a> method. You should normally do: <u>range = 2*amplitude</u></p>
+
+<h2>Rainflow algorithm</h2>
+
+<p>The algorithm used is the "range pair-range" algorithm as described
+in ASTM E 1049-85 and by de Jonge (1982). The result from the "range
+pair-range" algorithm is exactly similar to that of the pagoda-roof 
+"rainflow" algorithm as described by Matsuiski, M. and  Endo, T. 
+(1969). However, their descriptions are very different and the "range 
+pair-range" algorithm is very much simpler to program. </p>
+
+
+<h2>References</h2>
+<ol>
+  <li> Matsuiski, M. and Endo, T. (1969): "Fatigue of metals subjected to varying stress"</li>
+  <li> de Jonge, J.B. (1982): <a href="http://www.nlr.nl/images/genesis/reports/NLR-MP82039.pdf">
+       "The analysis of load-time histories by means of counting methods"</a></li>
+  <li> ASTM E 1049-85 (Reapproved 1997): "Standard practices for cycle counting in fatigue analysis", 
+    in: Annual Book of ASTM Standards, Vol. 03.01, Philadelphia 1999, pp. 710-718.</li>
+  <li><a href="http://en.wikipedia.org/wiki/Rainflow-counting_algorithm">Wikipedia: Rainflow-counting algorithm</a></li>
+</ol>
+
+<h2>Author</h2>
+The code was developed for Matlab by Dr. Adam Nieslonya. It
+was originally released for Matlab, see <a href="http://www.mathworks.com/matlabcentral/fileexchange/3026">announcement.</a> 
+
+
+<h2>Package for GNU Octave</h2>
+Source code can be obtained at <a href="http://code.google.com/p/rainflow-octave/">
+http://code.google.com/p/rainflow-octave/</a>.<br>
+GNU Octave specific issues should be addressed there.
+
+<h2>Figures</h2>
+<p> The following figures show an example rainflow matrix and stress cycles extracted from
+a series of turning points.</p>
+<img src="./html/rfmatrix.png" height=400 width=400 alt="Fig. 1: Example rainflow matrix" />
+<img src="./html/cycles.png" height=400 width=400 alt="Fig. 2: Stress cycles from a series of turning points." />
+
+<h2>Compilation and installation for GNU Octave </h2>
+<ol>
+  <li>Do the following to create a compiled mex-file from "rainflow.c" and to test the result:<br>
+    <code>
+      $ cd ./rainflow-octave    <br>
+      $ make                    <br>
+      $ ls ./src/rainflow.mex   <br>
+      rainflow.mex              <br> 
+      $ make test               <br> 
+    </code>
+    <li>Move files: rainflow.mex, rainflow.m and sig2ext.m to a place where GNU Octave can find them.<br>
+      Octave will locate oct- or mex- files automatically if they are in a
+      directory listed in the search path. To figure out the search path, do:<br>
+      <code>
+      $ octave </br>
+      octave>  path<br>
+      </code>
+      Octave's search path contain the following directories:<br>
+      .<br>
+      /usr/local/share/octave/site-m<br>
+</ol>
+
+<h2>Disclaimer for GNU Octave</h2>
+The main focus for the GNU Octave package development has been on the primary functionality:
+<ol>
+  <li>The rainflow function.</li>
+  <li>The function for extracting turning points from stress time series.</li>
+  <li>Documentation and testing.</li>
+  <li>Packaging.</li>
+</ol>
+
+<p>The auxilliary demonstration scripts are fully unmodified and have not been tested 
+extensively. The script <em>rfdemo1.m</em> is suspected to contain a Matlab specific 
+command associated with a button. The GNU Octave version 3.0.0 has been applied.</p>
+
+<p>
+Enjoy!<br>
+Torfinn Ottesen<br>
+</p>
+
+
+<hr>
+<p>The below text was written by Adam Niesłony before the GNU Octave packaging. It is kept unmodified 
+for reference purpose. For usage instructions, see the below <u>Quick start</u>.</p>
+
+<H1>Rain flow for MATLAB</H1>
+
+<p>Version date: 12.01.2005</p>
+
+<H2>Description</H2>
+
+<p>Here you can find the rain flow algorithm for cycle counting,  adapted for work in the  MATLAB<sup>&reg;</sup> environment. It has been translated from Turbo Pascal into C language and compiled to the MEX function.  The algorithm code has been prepared according to the ASTM standard [1] and  optimized considering the calculation time. The function was tested with use of PC computers in the  MS Windows<sup>&reg;</sup> operating system.<br>
+Please send all your remarks, suggestions and questions to the author.<br>
+E-mail: <a href="mailto:ajn@po.opole.pl">Adam Niesłony</a>
+</p>
+
+<h2>Author</h2>
+<p>The MEX function of the rain flow algorithm has been elaborated by Adam Niesłony. At present he is a postgraduate student of Technical University of Opole and he works on his Doctor's thesis in Department of Mechanics and Machine Design.<br>
+See the following pages:<br>
+<a href="http://www.po.opole.pl" target="_blank">Technical University of Opole</a><br>
+<a href="http://www.kmpkm.po.opole.pl" target="_blank">Katedra MiPKM</a>
+</p>
+
+
+<H2>Files</H2>
+<P>Toolbox files:</P>
+<pre>
+rainflow.m   - short description of the rainflow function,
+rainflow.c   - C MEX code of the rainflow function,
+rainflow.dll - compiled "rainflow.c" file (MATLAB 6.5, Windows 2000 Prof.),
+rfhist.m     - histograms of rainflow data,
+rfmatrix.m   - rainflow matrix calculation and visualization,
+rfdemo1.m    - demo for cycle counting, recomended for short signals,
+rfdemo2.m    - demo for rainflow matrix and histograms, recomended for long signals,
+sig2ext.m    - auxiliary function for rfdemo, it searches turning points from signals.
+</PRE>
+
+
+<H2>Installation</H2>
+<P>In order to instal the rainflow function, you must realise standard tasks, necessary during addition of new toolboxes to the MATLAB, i.e.</P>
+<ol>
+<LI>Download the file <a href="rainflow.zip">rainflow.zip</a>
+<li>Create a new directory for files of the rainflow toolbox
+<LI>Unpack all files from the archive to that directory
+<LI>Add a path to that directory, using the command "Edit Path" of the MATLAB
+</ol>
+
+<H2>Quick start</H2>
+<p>Using demos:</p>
+<pre class="blue">
+clear all
+rfdemo1
+rfdemo2
+</pre>
+
+<p>Rainflow counting on self generated (or loaded) signal:</p>
+<pre class="blue">
+clear all
+lengths=10000;
+s=10*randn(lengths,1)+rand(lengths,1);
+% or load the signal from file --> s=my_signal;
+tp=sig2ext(s);
+rf=rainflow(tp);
+rfm=rfmatrix(rf,20,20);
+surf(rfm)
+</pre>
+
+
+<H2>References</H2>
+<table>
+<tr>
+<td valign="top">[1]</td>
+<td>
+ASTM E 1049-85 (Reapproved 1997), <i>Standard practices for cycle counting in fatigue analysis,</i> in: Annual Book of ASTM Standards, Vol. 03.01, Philadelphia
+1999, pp. 710-718
+</td>
+</tr>
+</table>
+
+<p align="center" style="font-size: 10pt">end of page<br>&copy; by Adam Niesłony</p>
+
+</BODY>
+</HTML>
