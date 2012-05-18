@@ -1,8 +1,8 @@
 /*  RAINFLOW $ Revision: 1.0 $ */
 /*  by Adam Nieslony           */
-/*  Version 1.1 Torfinn Ottesen, 2011-12-14, 
-    - Array size increase, a[512], t[512]-> a[16384], t[16384]  
-*/
+/*  Version 1.1 Torfinn Ottesen, 2011-12-14                     */ 
+/*   - Array size increase, a[512], t[512]-> a[16384], t[16384] */ 
+
 
 
 #include <math.h>
