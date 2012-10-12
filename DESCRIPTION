@@ -1,6 +1,6 @@
 Name: rainflow
-Version: 1.0.0
-Date: 2009-01-02
+Version: 1.0.2
+Date: 2012-10-12
 Author: Adam Nieslony (code), Torfinn Ottesen (GNU Octave package)
 Maintainer: Torfinn Ottesen (at) gmail (dot) com
 Title: Rainflow count of stress cycles for fatigue analysis 
@@ -13,5 +13,13 @@ Description: This function identifies the stress cycles in an irregular
  The results are exactly equal to those obtained by the algorithm described
  by Matsuiski, M. and Endo, T. (1969): "Fatigue of metals subjected to 
  varying stress".
-Depends:
-License: GPL version 3
+Categories: fatigue time-series
+#Problems: 
+Url: http://code.google.com/p/rainflow-octave/
+Autoload: yes
+Depends: octave (>= 3.0.0)
+License: GPL 3
+#SystemRequirements: Unknown
+#BuildRequires: 
+#SVNRelease:
+
